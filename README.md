@@ -7,7 +7,7 @@ Obsidian-плагин для двусторонней синхронизации
 - Рабочее название: `GDrive BYO Sync`
 - Временный id плагина: `gdrive-byo-sync` (финальное имя и id не зафиксированы, см. `docs/PUBLISHING.md`)
 - Целевые платформы: Windows, macOS 13+, iOS
-- Текущий статус: **этап 01, исследование и архитектура**. Работающий код синхронизации ещё не написан.
+- Текущий статус: **этап 02, авторизация Google**. Device flow, хранение и автоматическое обновление токенов реализованы и покрыты unit-тестами; синхронизация ещё не написана. Живая проверка с реальным Google Cloud проектом — ожидается.
 
 ## Что уже есть
 
@@ -17,6 +17,7 @@ Obsidian-плагин для двусторонней синхронизации
 - `docs/GOOGLE_CLOUD_SETUP.md` — инструкция для пользователя по созданию OAuth-клиента.
 - `docs/PUBLISHING.md` — требования к публикации в community plugins и Google OAuth.
 - `docs/RESEARCH_NOTES.md` — источники и факты, на которых построены решения.
+- `src/auth/` — device flow («TVs and Limited Input devices»), менеджер токенов (хранение, авто-обновление, revoke), UI подключения.
 - Каркас сборки: `package.json`, `esbuild.config.mjs`, `tsconfig.json`, `manifest.json`, `src/main.ts`.
 
 ## Быстрый старт для разработки
@@ -24,16 +25,23 @@ Obsidian-плагин для двусторонней синхронизации
 ```powershell
 npm install
 npm run build        # tsc --noEmit + esbuild -> main.js
-npm test             # vitest (пока тестов нет, только заготовка)
+npm test             # vitest: метаданные релиза, device flow, менеджер токенов
 ```
 
 Установка в vault для ручной проверки:
 
 1. Собрать `main.js`.
-2. Скопировать `manifest.json` и `main.js` в `<vault>\.obsidian\plugins\gdrive-byo-sync\`.
+2. Скопировать `manifest.json`, `main.js` и `styles.css` в `<vault>\.obsidian\plugins\gdrive-byo-sync\`.
 3. Включить плагин в настройках Obsidian.
 
-На текущем этапе плагин при загрузке показывает Notice с текстом «scaffold loaded» — это заглушка, синхронизация не реализована.
+## Подключение Google Drive
+
+1. Создать OAuth-клиент типа «TVs and Limited Input devices» по инструкции `docs/GOOGLE_CLOUD_SETUP.md`.
+2. В настройках плагина вставить OAuth client ID и client secret.
+3. Выполнить команду **Connect Google Drive**, открыть страницу Google, ввести показанный код.
+4. Проверить статус командой **Show auth status**; отключение — **Disconnect Google Drive** (refresh token отзывается).
+
+Пока реализованы только подключение и токены: Drive API и синхронизация — этапы 03–04.
 
 ## Принципы проекта
 

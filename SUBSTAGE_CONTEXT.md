@@ -2,41 +2,43 @@
 
 ## Активная версия
 
-- Версия: `v0.01.03`
+- Версия: `v0.02.01`
 - Статус: `completed` (2026-10-19)
 - Дата фиксации: `2026-10-19`
 
 ## Цель подэтапа
 
-Собрать рабочий каркас плагина: конфиги сборки, минимальный `main.ts`, context-файлы, документация исследования и архитектуры.
+Реализовать device flow и жизненный цикл токенов: получение кода, polling, сохранение, авто-обновление access token, revoke.
 
 ## Что уже сделано
 
-- создана структура проекта (`docs/`, `src/`, `tests/`, `prompts/`);
-- написано сравнение решений (`docs/COMPARISON.md`);
-- написана архитектура (`docs/ARCHITECTURE.md`) и алгоритм (`docs/SYNC_ALGORITHM.md`);
-- написана инструкция по Google Cloud (`docs/GOOGLE_CLOUD_SETUP.md`);
-- описаны требования публикации (`docs/PUBLISHING.md`);
-- собран список источников (`docs/RESEARCH_NOTES.md`);
-- добавлен каркас сборки (`package.json`, `tsconfig.json`, `esbuild.config.mjs`, `manifest.json`, `versions.json`, `src/main.ts`);
-- установлены devDependencies: obsidian 1.14.4, esbuild 0.28.2, typescript 7.0.2, vitest 5.0.5, @types/node 26.6.5;
-- `npm run build` проходит, `main.js` собирается;
-- `npm test` проходит: 5 тестов на согласованность метаданных релиза;
-- создан GitHub-репозиторий https://github.com/No-time-to-sleep/obsidian-gdrive-sync, инициализирован git (`main`);
-- каркас установлен в vault `D:\odsidian1\первое\.obsidian\plugins\gdrive-byo-sync\` (ожидает включения пользователем).
+- `src/auth/errors.ts` — типизированные ошибки (`AuthError` с кодами);
+- `src/auth/types.ts` — типы токенов, credentials, `isStoredAuth` type guard, константа scope `drive.file`;
+- `src/auth/device-flow.ts` — чистые функции: form body, разбор device code и token ответов, классификация ошибок polling и refresh, интервалы, проверка срока токена, abortable sleep;
+- `src/auth/http.ts` — транспортный интерфейс `HttpClient` (для моков в тестах);
+- `src/auth/obsidian-http-client.ts` — реализация через `requestUrl` (`throw: false`, без CORS-проблем);
+- `src/auth/auth-manager.ts` — `connect()` с polling и обработкой `slow_down`/`pending`/`denied`/`expired`, `getAccessToken()` с refresh при `invalid_grant`, `disconnect()` с revoke;
+- `src/auth/device-code-modal.ts` — модальное окно с кодом, кнопками «Open Google page» / «Copy code» / «Cancel» (закрытие отменяет polling);
+- `src/settings.ts` — вкладка настроек: client ID, client secret (password-поле), Connect/Reconnect, Disconnect, статус, ссылка на инструкцию;
+- `src/main.ts` — команды `Connect Google Drive`, `Disconnect Google Drive`, `Show auth status`; хранение `{ settings, auth }` в `data.json`;
+- `styles.css` — стили кода и статусов;
+- тесты: `tests/device-flow.test.ts` (15) и `tests/auth-manager.test.ts` (10) на фейковом HTTP и часах; всего 30 тестов;
+- `npm run build` проходит, `main.js` собран (22–24 КБ);
+- версия плагина `0.2.1` (= `v0.02.01`), `versions.json` обновлён;
+- сборка установлена в три vault'а (`первое`, «Большие-вызовы-подготовка», `StudyVault`).
 
 ## Что не входит в подэтап
 
-- реальный OAuth device flow;
-- Drive adapter;
-- sync engine;
-- UI настроек.
+- loopback + PKCE для desktop (v0.02.03);
+- Drive API и синхронизация (этапы 03–04);
+- мастер настройки Google Cloud внутри UI (этап 06).
 
 ## Что не удалось проверить
 
-- Загрузку `main.js` в реальном Obsidian (нет запущенного vault/приложения в этой среде).
-- Поведение на macOS 13+ и iOS.
+- Живой device flow с реальными Google-креденшелами (нужен OAuth client пользователя) — ожидает пользователя.
+- Поведение `window.open` и `navigator.clipboard` в Obsidian mobile (iOS).
+- Авто-обновление access token после истечения в реальном времени (проверено только unit-тестами).
 
 ## Следующий логичный шаг
 
-- Этап 02, версия `v0.02.01`: реализовать device flow (client type «TVs and Limited Input devices») и хранение токенов. См. `PLAN.md` и `docs/ARCHITECTURE.md`, раздел 5.
+- `v0.02.02`: подключить реальный OAuth client в настройках плагина, пройти device flow на Windows, проверить статус после перезапуска и Disconnect (revoke); затем повторить на iOS.

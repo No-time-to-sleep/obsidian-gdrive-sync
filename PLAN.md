@@ -1,6 +1,7 @@
 # План проекта
 
 Формат версий: `vR.SS.TT` (релиз.стадия.подстадия). Одна версия — один завершённый подэтап.
+Semver в `manifest.json`: `vR.SS.TT` → `R.SS.TT` без ведущих нулей (например, `v0.02.01` = `0.2.1`).
 
 ## Roadmap
 
@@ -12,8 +13,8 @@
 
 ### Этап 02. Auth
 
-- `v0.02.01` — device flow: получение кода, polling, сохранение токенов, обновление access token.
-- `v0.02.02` — UI подключения в настройках (connect / disconnect / статус), проверка на Windows и iOS.
+- `v0.02.01` — device flow: получение кода, polling, сохранение токенов, обновление access token. ✅ 2026-10-19 (сборка + 30 тестов; живой Google Cloud не проверен)
+- `v0.02.02` — UI подключения в настройках (connect / disconnect / статус), проверка на Windows и iOS. 🔄 код готов, ждёт проверки на устройствах
 - `v0.02.03` — опциональный desktop loopback + PKCE (отдельный OAuth client type «Desktop app»).
 
 ### Этап 03. Drive Adapter
