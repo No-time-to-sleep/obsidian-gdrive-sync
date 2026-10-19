@@ -1,0 +1,27 @@
+{
+  "name": "gdrive-byo-sync",
+  "version": "0.0.1",
+  "description": "Obsidian plugin: two-way Google Drive sync with your own Google Cloud OAuth client.",
+  "private": true,
+  "main": "main.js",
+  "scripts": {
+    "dev": "node esbuild.config.mjs",
+    "build": "tsc -noEmit -skipLibCheck && node esbuild.config.mjs production",
+    "test": "vitest run",
+    "test:watch": "vitest"
+  },
+  "keywords": [
+    "obsidian",
+    "google-drive",
+    "sync",
+    "plugin"
+  ],
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^26.6.5",
+    "esbuild": "^0.28.2",
+    "obsidian": "^1.14.4",
+    "typescript": "^7.0.2",
+    "vitest": "^5.0.5"
+  }
+}

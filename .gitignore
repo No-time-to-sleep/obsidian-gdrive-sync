@@ -1,0 +1,20 @@
+# Build output
+main.js
+*.map
+
+# Dependencies
+node_modules/
+
+# Local/runtime data (tokens, sync state) must never be committed
+data.json
+
+# Obsidian local config
+.obsidian/
+
+# Test/coverage artifacts
+coverage/
+
+# OS/editor
+.DS_Store
+Thumbs.db
+*.log
