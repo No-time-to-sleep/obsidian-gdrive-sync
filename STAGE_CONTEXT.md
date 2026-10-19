@@ -28,6 +28,6 @@
 
 ## Что осталось проверить вручную
 
-- Подключить плагин в Obsidian (`D:\odsidian1\первое`) к реальному Google Cloud проекту и пройти device flow. ← не выполнено
+- Подключить плагин в Obsidian (`D:\odsidian1\первое`) к реальному Google Cloud проекту и пройти device flow. ← первая проверка: client ID пользователя отклонён (`Invalid client type`), создаётся корректный OAuth-клиент
 - Повторить подключение на iPhone (Obsidian mobile). ← не выполнено
 - Проверить, что после перезапуска Obsidian статус остаётся «connected» и access token обновляется сам. ← не выполнено

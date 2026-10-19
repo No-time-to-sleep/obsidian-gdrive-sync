@@ -38,9 +38,29 @@ export class GDriveByoSettingsTab extends PluginSettingTab {
 
     containerEl.createEl("p", {
       text:
-        'Create an OAuth client of type "TVs and Limited Input devices" in your own Google Cloud project, enable the Drive API, and keep the project in production mode so refresh tokens do not expire after 7 days.',
+        "This plugin talks to Google Drive with your own OAuth client, so no third-party server ever sees your notes. One client can be reused on all your devices.",
       cls: "gdrive-byo-hint",
     });
+
+    containerEl.createEl("h3", { text: "Setup" });
+
+    const steps = containerEl.createEl("ol", { cls: "gdrive-byo-steps" });
+    steps.createEl("li", {
+      text: "Create a Google Cloud project and enable the Google Drive API.",
+    });
+    steps.createEl("li", {
+      text:
+        'Create an OAuth client of type "TVs and Limited Input devices" (other client types cannot use this sign-in method).',
+    });
+    steps.createEl("li", {
+      text:
+        "Publish the app (In production) so the refresh token does not expire after 7 days.",
+    });
+    steps.createEl("li", {
+      text: "Paste the client ID and client secret below, then press Connect.",
+    });
+
+    containerEl.createEl("h3", { text: "Credentials" });
 
     new Setting(containerEl)
       .setName("OAuth client ID")
@@ -73,8 +93,10 @@ export class GDriveByoSettingsTab extends PluginSettingTab {
 
     const status = this.plugin.getAuthStatus();
 
+    containerEl.createEl("h3", { text: "Connection" });
+
     new Setting(containerEl)
-      .setName("Connection")
+      .setName("Status")
       .setDesc(describeStatus(status))
       .addButton((button) =>
         button

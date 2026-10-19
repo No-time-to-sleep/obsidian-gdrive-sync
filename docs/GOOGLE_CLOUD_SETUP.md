@@ -72,7 +72,7 @@
 
 | Ошибка | Причина | Что делать |
 | --- | --- | --- |
-| `invalid_client` | Создан не тот тип клиента | Пересоздайте OAuth client как **TVs and Limited Input devices** |
+| `invalid_client` / «Invalid client type» | OAuth-клиент создан другого типа (Desktop app, Web application и т.п.). Тип клиента нельзя изменить после создания | Создайте **новый** OAuth client с типом **TVs and Limited Input devices** и используйте его ID и секрет |
 | `access_denied` | Доступ отклонён на экране согласия | Повторите Connect и подтвердите доступ |
 | `admin_policy_enforced` | Администратор Google Workspace блокирует сторонние приложения | Разрешите приложение в админке или используйте личный аккаунт |
 | Каждую неделю просит переподключиться | Приложение осталось в статусе Testing | Переведите OAuth consent screen в **In production** |
@@ -83,4 +83,5 @@
 
 - Факты о scope, статусах и 7-дневном refresh token подтверждены документацией Google (см. `RESEARCH_NOTES.md`).
 - Device flow в плагине реализован и покрыт unit-тестами (этап 02).
+- Живой запрос к `/device/code` 2026-10-19 подтвердил: клиент неверного типа Google отклоняет с `invalid_client: Invalid client type` (см. troubleshooting).
 - Пошаговый проход этой инструкции в живом Google Cloud Console ещё не выполнялся — выполняется при первом подключении.

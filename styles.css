@@ -27,3 +27,12 @@
   color: var(--text-muted);
   font-size: var(--font-ui-smaller);
 }
+
+.gdrive-byo-steps {
+  margin-block: 0.5em 1em;
+  padding-inline-start: 1.5em;
+}
+
+.gdrive-byo-steps li {
+  margin-block: 0.25em;
+}
