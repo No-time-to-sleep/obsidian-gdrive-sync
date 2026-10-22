@@ -14,7 +14,7 @@ Semver в `manifest.json`: `vR.SS.TT` → `R.SS.TT` без ведущих нул
 ### Этап 02. Auth
 
 - `v0.02.01` — device flow: получение кода, polling, сохранение токенов, обновление access token. ✅ 2026-10-19 (сборка + 30 тестов; живой Google Cloud не проверен)
-- `v0.02.02` — UI подключения в настройках (connect / disconnect / статус), проверка на Windows и iOS. 🔄 код готов, ждёт проверки на устройствах
+- `v0.02.02` — UI подключения в настройках (connect / disconnect / статус), проверка на Windows и iOS. 🔄 Windows проверен 2026-10-23 (device flow + Drive API 200); iOS ожидает
 - `v0.02.03` — опциональный desktop loopback + PKCE (отдельный OAuth client type «Desktop app»). ⏸ отложено 2026-10-19: решение остаться на device flow.
 
 ### Этап 03. Drive Adapter
