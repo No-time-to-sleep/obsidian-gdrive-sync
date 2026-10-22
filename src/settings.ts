@@ -78,7 +78,7 @@ export class GDriveByoSettingsTab extends PluginSettingTab {
     new Setting(containerEl)
       .setName("OAuth client secret")
       .setDesc(
-        "Stored locally in this vault's data.json and sent only to Google."
+        "Stored locally in this vault's data.json and sent only to Google. Copy the full value; it starts with GOCSPX-."
       )
       .addText((text) => {
         text

@@ -249,7 +249,7 @@ export class AuthManager {
 
   private friendlyError(code: string | null, message: string): string {
     if (code === "invalid_client") {
-      return 'Google rejected the OAuth client. Use the client type "TVs and Limited Input devices" and copy the full client ID and secret.';
+      return `Google rejected the OAuth client. ${message} Check that the client type is "TVs and Limited Input devices" and that the client ID and client secret are copied completely.`;
     }
     return message;
   }
