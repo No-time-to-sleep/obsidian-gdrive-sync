@@ -48,9 +48,9 @@
 
 - [ ] Финальное имя и id утверждены, коллизий нет.
 - [ ] `manifest.json` заполнен полностью (author, authorUrl, description).
-- [ ] Лицензия добавлена (решение: MIT или другая — обсудить).
+- [x] Лицензия MIT добавлена (`LICENSE`).
 - [ ] README: установка, настройка Google Cloud, скриншоты, troubleshooting, ограничения `drive.file`.
-- [ ] Privacy policy в репозитории.
+- [x] Privacy policy в репозитории и на GitHub Pages (`docs/privacy.md`).
 - [ ] Нет Node API в runtime-коде; `isDesktopOnly: false` корректен.
 - [ ] Сборка из чистого репозитория проходит (`npm ci && npm run build`).
 - [ ] Тесты проходят (`npm test`).

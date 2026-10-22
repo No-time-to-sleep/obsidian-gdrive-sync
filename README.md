@@ -9,6 +9,13 @@ Obsidian-плагин для двусторонней синхронизации
 - Целевые платформы: Windows, macOS 13+, iOS
 - Текущий статус: **этап 02, авторизация Google**. Device flow, хранение и автоматическое обновление токенов реализованы и покрыты unit-тестами; синхронизация ещё не написана. Живая проверка с реальным Google Cloud проектом — ожидается.
 
+## Публичные страницы
+
+- Homepage: https://no-time-to-sleep.github.io/obsidian-gdrive-sync/
+- Privacy policy: https://no-time-to-sleep.github.io/obsidian-gdrive-sync/privacy.html
+- Terms of use: https://no-time-to-sleep.github.io/obsidian-gdrive-sync/terms.html
+- Issues: https://github.com/No-time-to-sleep/obsidian-gdrive-sync/issues
+
 ## Что уже есть
 
 - `docs/COMPARISON.md` — сравнение с существующими решениями (Obsidian Sync, Remotely Save, Google Drive Sync и др.).
